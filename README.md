@@ -75,16 +75,24 @@ Dense(5, softmax)
 | Dataset | APTOS 2019 (3,662 images) |
 | Train/Val split | 80/20 stratified |
 
-### Training Details
+## 🧪 Experimental Evaluation and Model Development
 
-| Version | Model | Key Changes | Val Accuracy | Val AUC | Status |
-| :--- | :--- | :--- | :---: | :---: | :--- |
-| **v1** | EfficientNetB0 (original) | Frozen base, ImageDataGenerator | 5–27% | unstable | ❌ Broken (val shuffling bug) |
-| **v2** | EfficientNetB0 | Unfroze top 30 layers | 49.38% every epoch | 0.64 | ❌ Majority class collapse |
-| **v3** | MobileNetV2 | Fixed generators, class weights | 49.38% stuck | 0.68 | ❌ Still collapsed |
-| **v4** | MobileNetV2 | tf.data pipeline, stratified split | 58.39% | 0.85 | ⚠️ Unstable |
-| **v5** | MobileNetV2 | Fixed preprocessing bug ([-1,1] scaling) | 72.7% | 0.946 | ✅ Best so far |
----
+Multiple architectures, preprocessing strategies and training configurations were investigated to improve classification performance and address class imbalance.
+
+| # | Model / Approach | Results | Outcome |
+|---|---|---|---|
+| 1 | EfficientNetB0, frozen base, ImageDataGenerator | Validation accuracy fluctuated between 5% and 49% | Failed: unstable validation |
+| 2 | EfficientNetB0, fine-tuned top layers | 49.38% validation accuracy | Failed: majority-class collapse |
+| 3 | EfficientNet with uncapped class weights | 5.2% validation accuracy | Failed: rare-class collapse |
+| 4 | MobileNetV2, ImageDataGenerator + class weights | 49.38%, validation loss exploded | Failed: generator pipeline |
+| 5 | MobileNetV2, tf.data, stratified split | 58.4%, AUC 0.868 | Partial: preprocessing mismatch |
+| 6 | **MobileNetV2, tf.data, consistent [-1,1] scaling, two-phase training** | **72.7% accuracy, AUC 0.946, loss 0.656** | **Best recorded result** |
+| 7 | EfficientNetB3 + Ben Graham preprocessing | ~45% accuracy | Failed: suspected preprocessing mismatch |
+| 8 | EfficientNetB4 + Ben Graham + circle crop + focal/QWK loss | 68.89% accuracy; 69.30% with TTA; AUC ~0.895 | Failed: minority-class recall |
+
+**Best recorded experiment:** MobileNetV2 with consistent preprocessing and two-phase training, achieving 72.7% validation accuracy and 0.946 validation AUC.
+
+> These are validation results, not independent test-set or clinical validation results.
 
 
 ---
