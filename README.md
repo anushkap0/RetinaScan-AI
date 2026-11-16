@@ -16,10 +16,8 @@ This project uses a fine-tuned **MobileNetV2** CNN to automate DR grading, poten
 ## Deeployed on Render
  https://retinaguard.onrender.com/
 ## Dashboard
-<img width="1893" height="855" alt="image" src="https://github.com/user-attachments/assets/fb1ad8ac-7646-4c54-8a9b-e6dcf8d3cf92" />
-
-
-<img width="1574" height="627" alt="image" src="https://github.com/user-attachments/assets/5efd07a4-a7b3-4862-b103-8b35bf9aee18" />
+<img width="1523" height="686" alt="image" src="https://github.com/user-attachments/assets/df636625-4070-41bd-bbc6-74780497e93d" />
+<img width="1488" height="594" alt="image" src="https://github.com/user-attachments/assets/21ab90a9-0ceb-4aa1-8d6b-1c913cfb0ff6" />
 <img width="1498" height="683" alt="image" src="https://github.com/user-attachments/assets/7a9fb53a-7ac2-4651-b0e2-9754b9fdc4f3" />
 <img width="1552" height="692" alt="image" src="https://github.com/user-attachments/assets/f50f14e2-eb60-429e-aa2c-2b5ca4299835" />
 
